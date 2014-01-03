@@ -17,14 +17,18 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace RadioBronyPlayer
 {
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         private Boolean isPlaying = false;
 
         private readonly BackgroundWorker infoRefresher = new BackgroundWorker();
