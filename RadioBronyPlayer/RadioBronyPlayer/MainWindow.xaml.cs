@@ -56,6 +56,14 @@ namespace RadioBronyPlayer
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
+            MinimizeButton.MouseUp += MinimizeButton_Click;
+            
+        }
+
+        void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MinimizeButton.ReleaseAllTouchCaptures();
+            WindowState = WindowState.Minimized;
         }            
 
         void infoRefresher_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -144,8 +152,11 @@ namespace RadioBronyPlayer
 
         private void mouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            if (!MinimizeButton.IsMouseOver)
+            {
+                if (e.ChangedButton == MouseButton.Left)
+                    this.DragMove();
+            }
         }
     }
 }

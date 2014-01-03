@@ -34,7 +34,7 @@
             <Label Name="listeners" Content="01" Height="24" Margin="0,-4,0,0" Width="23" FontWeight="Bold"/>
             <Image Source="Resources/listen.png" Margin="-5,-2,0,1"/>
         </StackPanel>
-
+        <Label Name="MinimizeButton" Content="_" HorizontalAlignment="Left" Margin="369,-7,0,0" VerticalAlignment="Top" Width="16" Height="28" Foreground="#FFFBFBFB" FontSize="14" FontWeight="Bold"/>
     </Grid>
 </Window>
 
