@@ -54,7 +54,7 @@ namespace RadioBronyPlayer
             VolumeSlider.ValueChanged += VolumeSlider_ValueChanged;
             changeVolume(VolumeSlider.Value);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             dispatcherTimer.Start();
             MinimizeButton.MouseUp += MinimizeButton_Click;
             
