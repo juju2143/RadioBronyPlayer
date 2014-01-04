@@ -154,9 +154,19 @@ namespace RadioBronyPlayer
         {
             if (!MinimizeButton.IsMouseOver)
             {
-                if (e.ChangedButton == MouseButton.Left)
-                    this.DragMove();
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    // this prevents win7 aerosnap
+                    if (this.ResizeMode != System.Windows.ResizeMode.NoResize)
+                    {
+                        this.ResizeMode = System.Windows.ResizeMode.NoResize;
+                        this.UpdateLayout();
+                    }
+
+                    DragMove();
+                };
             }
         }
+
     }
 }
