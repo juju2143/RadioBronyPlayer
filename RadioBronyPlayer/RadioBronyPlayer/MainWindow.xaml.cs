@@ -38,6 +38,8 @@ namespace RadioBronyPlayer
 
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
+        System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             infoRefresher.RunWorkerAsync();
@@ -57,23 +59,36 @@ namespace RadioBronyPlayer
             dispatcherTimer.Interval = new TimeSpan(0, 0, 30);
             dispatcherTimer.Start();
             MinimizeButton.MouseUp += MinimizeButton_Click;
-            
+            ni.Icon = Properties.Resources.icon;
+            ni.Visible = true;
+            ni.DoubleClick +=
+                delegate(object sender, EventArgs args)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                };
         }
 
         void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             MinimizeButton.ReleaseAllTouchCaptures();
             WindowState = WindowState.Minimized;
+            this.Hide();
         }            
 
         void infoRefresher_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if(!title.Text.Equals(currentTitle) && isPlaying)
+            {
+                ni.ShowBalloonTip(5000, "Radio Brony", currentTitle + " par " + currentArtist + " (" + currentListeners + " auditeurs)", System.Windows.Forms.ToolTipIcon.Info);
+            }
             title.Text = currentTitle;
             title.ToolTip = "Chanson : " + currentTitle;
             artist.Text = currentArtist;
             artist.ToolTip = "Artiste : " + currentArtist;
             listeners.Content = currentListeners;
             listeners.ToolTip = "Auditeurs : " + currentListeners;
+            ni.Text = currentTitle + " - " + currentArtist + " (" + currentListeners + " auditeurs)";
         }
 
         void infoRefresher_DoWork(object sender, DoWorkEventArgs e)
